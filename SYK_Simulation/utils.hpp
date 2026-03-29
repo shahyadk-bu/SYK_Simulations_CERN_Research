@@ -1,3 +1,6 @@
+#ifndef UTILS_HPP
+#define UTILS_HPP
+
 #include <Eigen/Dense>
 #include <string>
 #include <complex>
@@ -6,7 +9,6 @@
 #include <cmath>
 #include <fstream>
 #include <filesystem>
-#include <cmath>
 
 // We create the imaginary unit i
 std::complex<double> i(0.0, 1.0);
@@ -238,3 +240,5 @@ void SYKRecursion(int K){
         std::cout << "The operators for " + std::to_string(K) + " fermionic modes are already saved. \n";
     }
 }
+
+#endif
