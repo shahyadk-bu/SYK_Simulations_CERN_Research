@@ -6,5 +6,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(${CMAKE_SOURCE_DIR}/external/eigen-5.0.0)
 
-add_executable(run run.cpp)
+add_executable(run
+    run.cpp
+    hamiltonian.cpp
+    utils.cpp
+)
 add_executable(test test.cpp)

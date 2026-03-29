@@ -1,3 +1,6 @@
+#include "hamiltonian.hpp"
+#include "utils.hpp"
+
 #include <iostream>
 #include <Eigen/Dense>
 #include <Eigen/Eigenvalues>
@@ -9,9 +12,6 @@
 #include <fstream>
 #include <filesystem>
 #include <random>
-
-#include "hamiltonian.hpp"
-#include "utils.hpp"
 
 
 // We create the imaginary unit i
@@ -131,7 +131,7 @@ Output:
     void
 */
 void Hamiltonian::createMatrix(){
-    std::string filename = "ops_" + std::to_string(K_) + "Modes.txt";
+    std::string filename = "../majorana_matricies/ops_" + std::to_string(K_) + "Modes.txt";
 
     // Make the Majorana Operators if they dont exist yet
     if (!std::filesystem::exists(filename)){
@@ -259,8 +259,10 @@ void Hamiltonian::saveHamObj() const {
     std::ofstream out(filename);
 
     if (!out) {
-            throw std::invalid_argument("Could not open file.\n");
+            throw std::invalid_argument("Could not open file during saveHamObj() function.\n");
         }
+
+    out << std::scientific << std::setprecision(17);
 
     out << K_ << "\n";
     out << J_ << "\n";
@@ -305,7 +307,7 @@ void Hamiltonian::loadHamObj(const std::string& filename) {
     std::ifstream in(filename);
 
     if (!in) {
-        throw std::invalid_argument("Could not open file.\n");
+        throw std::invalid_argument("Could not open file during loadHamObj() function.\n");
     }
 
     int rows, cols;
