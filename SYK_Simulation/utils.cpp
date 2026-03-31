@@ -232,3 +232,70 @@ void SYKRecursion(int K){
         std::cout << "The operators for " + std::to_string(K) + " fermionic modes are already saved. \n";
     }
 }
+
+/*
+This function puts the input data into a CSV file and saves it.
+
+Inputs: 
+    Eigen::VectorXd OR std::vector<double> data; The data being saved to CSV
+    std::string filename; The name of the file we are storing the data in
+    OPTIONAL std::string funcName; The name of the function calling this method, optional because default is "" as defined in .hpp decleration
+Output:
+    void
+*/
+void dataToCSV(const Eigen::VectorXd& data, const std::string& filename, const std::string& funcName) {
+    std::ofstream out(filename);
+
+    if (!out) {
+        if (funcName == "") {
+            throw std::runtime_error("Could not open file to create CSV during dataToCSV() function.\n");  
+        }
+        else {
+            throw std::runtime_error("Could not open file to create CSV during dataToCSV() function in the " + funcName + " function.\n");
+        }
+    }
+
+    out << std::scientific << std::setprecision(17);
+
+    if (data.size() == 0) {
+    out << '\n';
+    std::cout << "The data input has size 0 so the CSV file is left empty.";
+    return;
+    }
+
+    for (int j = 0; j < data.size()-1; j++) {
+        out << data(j) << ",";
+    }
+    out << data(data.size()-1) << "\n";
+}
+
+void dataToCSV(const std::vector<double>& data, const std::string& filename, const std::string& funcName) {
+    if (std::filesystem::exists(filename)){
+            std::cout << "The file requested already exists. No new files were saved.\n";
+            return;
+        }
+
+    std::ofstream out(filename);
+
+    if (!out) {
+        if (funcName == "") {
+            throw std::runtime_error("Could not open file to create CSV during dataToCSV() function.\n");  
+        }
+        else {
+            throw std::runtime_error("Could not open file to create CSV during dataToCSV() function in the " + funcName + " function.\n");
+        }
+    }
+
+    out << std::scientific << std::setprecision(17);
+
+    if (data.size() == 0) {
+    out << '\n';
+    std::cout << "The data input has size 0 so the CSV file is left empty.";
+    return;
+    }
+
+    for (size_t j = 0; j < data.size()-1; j++) {
+        out << data[j] << ","; 
+    }
+    out << data[data.size()-1] << "\n";
+}

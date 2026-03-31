@@ -18,5 +18,7 @@ Eigen::MatrixXcd identity(int N);
 void saveMats(const std::vector<Eigen::MatrixXcd>& ops, const std::string& filename);
 std::vector<Eigen::MatrixXcd> loadMats(const std::string& filename);
 void SYKRecursion(int K);
+void dataToCSV(const Eigen::VectorXd& data, const std::string& filename, const std::string& funcName = "");
+void dataToCSV(const std::vector<double>& data, const std::string& filename, const std::string& funcName = "");
 
 #endif

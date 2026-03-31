@@ -339,3 +339,24 @@ void Hamiltonian::loadHamObj(const std::string& filename) {
     e_vals = evals;
 
 }
+
+/*
+This function saves the eigen values and the eigen repulsion data into CSV files
+
+Inputs: 
+    void
+Output:
+    void
+*/
+void Hamiltonian::saveSpectralData() const {
+    std::vector<double> spacings = findLevelSpacings();
+
+    std::string evalsFilename = "../spectralData/eigenValueData/evals_K" + std::to_string(K_) 
+    + "_J" + std::to_string(J_) + "_seed" + std::to_string(seed_) + ".csv";
+
+    std::string eRepulsionFilename = "../spectralData/eigenRepulsionData/erep_K" + std::to_string(K_) 
+    + "_J" + std::to_string(J_) + "_seed" + std::to_string(seed_) + ".csv";
+
+    dataToCSV(e_vals, evalsFilename, "saveSpectralData() evals part");
+    dataToCSV(spacings, eRepulsionFilename, "saveSpectralData() spacings part");
+}

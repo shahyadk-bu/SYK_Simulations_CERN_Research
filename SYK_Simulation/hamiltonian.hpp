@@ -39,6 +39,8 @@ class Hamiltonian {
 
         Eigen::MatrixXcd findEigenVectors() const;
         std::vector<double> findLevelSpacings() const;
+
+        void saveSpectralData() const;
         
 
 };
