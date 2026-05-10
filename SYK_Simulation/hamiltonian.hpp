@@ -16,12 +16,15 @@ class Hamiltonian {
         std::mt19937 gen_; // Random number engine
         int seed_; // The seed used to generate random numbers
         Eigen::VectorXd e_vals; // The eigenvalues in an Eigen::vector sorted in increasing order
+        Eigen::VectorXd unf_Evals; // The unfolded eigenvalues in an Eigen::vector sorted in increasing order
 
         double sampleCon();
         void createMatrix();
         void loadHamObj(const std::string& filename);
 
         void findEigenValues();
+        void unfoldEigenValues() const;
+        double Eta() const;
 
     public:
         Hamiltonian(int K, double J, int seed);

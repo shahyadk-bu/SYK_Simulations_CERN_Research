@@ -23,6 +23,7 @@ Hamiltonian::Hamiltonian(int K, double J, int seed)
 {
     createMatrix();
     findEigenValues();
+    unfoldEigenValues();
 }
 
 // Constructor used to load in a saved Hamiltonian object
@@ -31,6 +32,7 @@ Hamiltonian::Hamiltonian(const std::string& filename)
 {
     loadHamObj(filename);
     gen_ = std::mt19937(seed_);
+    unfoldEigenValues();
 }
 
 /*
@@ -205,6 +207,53 @@ Eigen::MatrixXcd Hamiltonian::findEigenVectors() const {
     }
 
     return solver.eigenvectors();
+}
+
+/*
+This helper function finds the eta function which is used to find the Q-Hermite modes used in unfolding the SYK eigen values.
+
+Inputs: 
+    void
+Output:
+    double eta: The value of eta(N, q = 4)
+*/
+double Hamiltonian::Eta() const {
+    int N = K_ * 2; // The number of majorana matricies N is equal to twice the number of fermionic modes
+    int q = 4; // We only use the q=4 case of four majorana matrices per term in the Hamiltonian sum
+
+    double a = 1.0 / static_cast<double>(choose(N, q));
+    double b = 0.0;
+    
+    double term = 0;
+    for(int j = 0; j <= q; j++) {
+        if ((q - j) % 2 == 0) {
+            term = term + 1;
+        }
+        else {
+            term = term - 1;
+        }
+
+        term = term * choose(q, j) * choose(N - q, q - j);
+
+        b = b + term;
+        term = 0;
+    }
+
+    return a * b;
+}
+
+/*
+This function "unfolds" the eigen-values so we can find the spacings properly with mean spacing 0.
+
+Inputs: 
+    void
+Output:
+    Eigen::VectorXd unfEvals; The unfolded eigenvalues.
+*/
+void Hamiltonian::unfoldEigenValues() const {
+
+
+
 }
 
 /*

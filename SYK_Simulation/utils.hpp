@@ -11,6 +11,8 @@
 #include <fstream>
 #include <filesystem>
 #include <iomanip>
+#include <stdexcept>
+#include <algorithm>
 
 Eigen::Matrix2cd pauliMat(const std::string& type);
 Eigen::MatrixXcd tensor(const Eigen::MatrixXcd& A, const Eigen::MatrixXcd& B);
@@ -20,5 +22,6 @@ std::vector<Eigen::MatrixXcd> loadMats(const std::string& filename);
 void SYKRecursion(int K);
 void dataToCSV(const Eigen::VectorXd& data, const std::string& filename, const std::string& funcName = "");
 void dataToCSV(const std::vector<double>& data, const std::string& filename, const std::string& funcName = "");
+long long choose(int n, int k);
 
 #endif

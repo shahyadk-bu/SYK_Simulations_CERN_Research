@@ -10,7 +10,7 @@
 #include "hamiltonian.hpp"
 
 int main() {
-    Hamiltonian ham = Hamiltonian(6, 3, 10);
+    Hamiltonian ham = Hamiltonian(9, 1, 10);
     ham.saveHamObj();
     ham.saveSpectralData();
     return 0;

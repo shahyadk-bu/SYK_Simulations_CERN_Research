@@ -42,3 +42,7 @@
 
 # Build File
 SYK_Simulation/build/
+# Simulation data (to avoid storage issues on Git)
+SYK_Simulation/majorana_matrices/
+SYK_Simulation/spectralData/
+SYK_Simulation/hamiltonianObjects/

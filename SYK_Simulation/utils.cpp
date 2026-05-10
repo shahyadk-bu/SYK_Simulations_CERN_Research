@@ -59,6 +59,28 @@ Eigen::MatrixXcd tensor(const Eigen::MatrixXcd& A, const Eigen::MatrixXcd& B){
 }
 
 /*
+This function will ouput n choose k (n k) using the product form since it is more computational cheap (instead of the factorial form).
+
+Inputs: 
+    int k; the k in n choose k
+    int n; the n in n choose k
+Output:
+    long long nCHk; the output of n choose k
+*/
+long long choose(int n, int k) {
+    if (k < 0 || k > n) return 0;
+    if (k == 0 || k == n) return 1;
+
+    k = std::min(k, n - k);
+    long long result = 1;
+
+    for (int i = 1; i <= k; ++i) {
+        result = result * (n - k + i) / i;
+    }
+    return result;
+}
+
+/*
 This function just gives you the NxN identity 
 Inputs: 
     int N; dimension you want for the identity
